@@ -1,10 +1,6 @@
-// Импортируем саму библиотеку
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 
-// Импортируем стили
-import "simplelightbox/dist/simple-lightbox.min.css";
-
-
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const images = [
   {
@@ -74,8 +70,9 @@ const images = [
 
 const galleryContainer = document.querySelector('.gallery');
 
-const galleryMarkup = images.map(({ preview, original, description }) => {
-  return `
+const galleryMarkup = images
+  .map(({ preview, original, description }) => {
+    return `
     <li class="gallery-item">
       <a class="gallery-link" href="${original}">
         <img
@@ -86,6 +83,14 @@ const galleryMarkup = images.map(({ preview, original, description }) => {
         />
       </a>
     </li>`;
-}).join('');
+  })
+  .join('');
 
-galleryContainer.insertAdjacentHTML("beforeend", galleryMarkup);
+galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+
+const gallery = new SimpleLightbox('.gallery-item a', {
+  captionsData: 'alt', // Вказуємо, що підписи братимуться з атрибута 'alt' зображення
+  captionDelay: 250, // Затримка появи підпису
+});
+
+gallery.on('show.simplelightbox');
