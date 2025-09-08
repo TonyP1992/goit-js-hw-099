@@ -16,9 +16,16 @@ formEl.addEventListener('input', e => {
 // ============================================
 document.addEventListener("DOMContentLoaded", ()=>{
     const lsData = getFromLs("formData");
-    formEl.elements.email.value = lsData.email;
+    try {
+        formData = lsData;
+formEl.elements.email.value = lsData.email;
     formEl.elements.message.value = lsData.message;
-})
+    } catch {
+        console.log("Error!");
+        
+    }
+    
+});
 
 // ============================================
 function saveToLS(key, value) {
